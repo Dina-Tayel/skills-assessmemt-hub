@@ -7,6 +7,7 @@ return[
     'contact'=>'Contact',
     'signin'=>'Sign In',
     'signup'=>'Sign Up',
+    'signout'=>'Sigin Out',
 
     //home page
     'TheroTitle'=>'SkillsHub Free Online Skill Assessment',

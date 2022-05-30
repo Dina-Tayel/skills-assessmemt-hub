@@ -5,3 +5,10 @@
 {{-- <div id="errors-msg" class="alert alert-danger">
 
 </div> --}}
+
+{{-- @if (session('status')) --}}
+    <div id="success-email" class="alert alert-success">
+        {{-- {{ session('status') }} --}}
+    </div>
+{{-- @endif --}}
+

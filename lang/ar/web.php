@@ -7,7 +7,7 @@ return[
     'contact'=>'اتصل بنا',
     'signin'=>'تسجيل دخول',
     'signup'=>'تسجيل حساب',
-
+    'signout'=>'تسجيل الخروج',
     //home page
     'TheroTitle'=>'موقع اختبار مهارات اونلاين',
     'TheroDescription'=>'انضم الينا وابدأ باختبر مهاراتك',

@@ -9,4 +9,6 @@ return [
     'MessageEmailUnique' => 'البريد الإلكتروني تم أخذه.',
     'MessageSubjectString' => 'يجب ألا يزيد الموضوع عن 200 حرف',
     'MessageBodyRequired' => 'نص الرسالة مطلوب',
+    'email'=>'حقل الايميل مطلوب',
+  
 ];

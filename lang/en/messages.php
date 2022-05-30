@@ -10,5 +10,6 @@ return [
     'MessageEmailUnique' => 'The email has already been taken.',
     'MessageSubjectString' => 'The subject must not be greater than 200 characters.',
     'MessageBodyRequired' => 'The body of message is required',
+    'email'=>'The Email field is required'
    
 ];

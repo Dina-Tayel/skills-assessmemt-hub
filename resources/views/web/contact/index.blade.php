@@ -91,6 +91,7 @@
 @section('scripts')
     <script>
             $('#success-msg').hide()
+            $('#success-email').hide()
             // $('#errors-msg').hide()
             $('#contact-form-btn').click(function(e){
             $('#success-msg').hide()

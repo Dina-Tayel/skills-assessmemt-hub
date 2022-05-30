@@ -25,7 +25,7 @@ Route::middleware('lang')->group(function(){
     Route::get('skill/show/{id}', [SkillController::class,'show']);
     Route::get('exam/show/{id}', [ExamController::class,'show']);
     Route::get('questions/show/{id}', [ExamController::class,'questions']);
-    Route::get('/contact',[ContactController::class,"index"]);
+    Route::get('/contact',[ContactController::class,"index"])->middleware('verified');
     Route::post('contact/send/message',[ContactController::class,"send"]);
 });
 
