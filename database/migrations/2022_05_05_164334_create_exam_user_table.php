@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('exam_id')->constrained();
-            $table->float('score',5,2) ; // max score 100.00
-            $table->tinyInteger('max_time'); // max time is equal to duration_mins
-            $table->enum('status',['opened','closed']);
+            $table->float('score',5,2)->nullable() ; // max score 100.00
+            $table->tinyInteger('max_time')->nullable(); // max time is equal to duration_mins
+            $table->enum('status',['opened','closed'])->default('closed');
             $table->timestamps();
         });
     }

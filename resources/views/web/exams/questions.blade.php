@@ -2,6 +2,10 @@
 @section('title')
     Show Questions
 @endsection
+@section('css')
+    Show Questions
+@endsection
+<link href="{{ asset('web/css/TimeCircles.css') }}" rel="stylesheet">
 @section('content')
     <!-- Hero-area -->
     <div class="hero-area section">
@@ -44,7 +48,8 @@
 
                 <!-- main blog -->
                 <div id="main" class="col-md-9">
-
+                    <form id="exam-submit-form" method="POST" action="{{ url("exam/submit/{$exam->id}") }}">
+                        @csrf</form>
                     <!-- blog post -->
                     <div class="blog-post mb-5">
                         <p>
@@ -59,34 +64,49 @@
                                         @endfor
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1"
-                                                    value="option1">
+                                                <input type="radio" form="exam-submit-form"
+                                                    name="answers[{{ $question->id }}]" id="optionsRadios1" value="1"
+                                                    {{ is_array(old("answers[$question->id]")) && in_array('1', old('answers')) ? ' checked' : '' }}>
                                                 {{ $question->option_1 }}
                                             </label>
+
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2"
-                                                    value="option2">
+                                                <input type="radio" form="exam-submit-form"
+                                                    name="answers[{{ $question->id }}]" id="optionsRadios2" value="2"
+                                                    {{ is_array(old("answers[$question->id]")) && in_array('2', old('answers')) ? ' checked' : '' }}>
                                                 {{ $question->option_2 }}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios3"
-                                                    value="option3">
+                                                <input type="radio" form="exam-submit-form"
+                                                    name="answers[{{ $question->id }}]" id="optionsRadios3" value="3">
                                                 {{ $question->option_3 }}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios3"
-                                                    value="option3">
+                                                <input type="radio" form="exam-submit-form"
+                                                    name="answers[{{ $question->id }}]" id="optionsRadios3" value="4">
                                                 {{ $question->option_4 }}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+
+                                        </ul>
+                                    </div>
+                                @endif
+
                             @endforeach
 
 
@@ -96,7 +116,8 @@
                     <!-- /blog post -->
 
                     <div>
-                        <button class="main-button icon-button pull-left">Submit</button>
+                        <button type="submit" form="exam-submit-form"
+                            class="main-button icon-button pull-left">Submit</button>
                         <button class="main-button icon-button btn-danger pull-left ml-sm">Cancel</button>
                     </div>
                 </div>
@@ -118,6 +139,8 @@
                                 <i class="fa fa-star-o"></i>
                             @endfor
                         </li>
+                        {{-- <div class="countdwn" data-timer="3"></div> --}}
+                        <div class="countdwn" data-timer="{{ $exam->duration_mins * 60 }}"></div>
                     </ul>
                     <!-- /exam details widget -->
 
@@ -134,4 +157,24 @@
 
     </div>
     <!-- /Blog -->
+@endsection
+
+
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('web/js/TimeCircles.js') }}"></script>
+    <script>
+        $(".countdwn").TimeCircles({
+            time: {
+                Days: {
+                    show: false
+                }
+            },
+            count_past_zero: false,
+
+        }).addListener(function(unit, value, total) {
+            if (total <= 0) {
+                alert("ksd");
+            }
+        });
+    </script>
 @endsection

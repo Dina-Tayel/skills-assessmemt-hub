@@ -30,7 +30,8 @@ class Exam extends Model
     //exam belongs to many users
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)
+        ->withPivot('score','max_time','status')->withTimestamps();
     }
 
     // decode name according to websitelanguage

@@ -25,8 +25,14 @@ Route::middleware('lang')->group(function(){
     Route::get('skill/show/{id}', [SkillController::class,'show']);
     Route::get('exam/show/{id}', [ExamController::class,'show']);
     Route::get('questions/show/{id}', [ExamController::class,'questions']);
-    Route::get('/contact',[ContactController::class,"index"])->middleware('verified');
+    Route::get('/contact',[ContactController::class,"index"])->middleware(['auth','verified','student']);
     Route::post('contact/send/message',[ContactController::class,"send"]);
+});
+
+Route::middleware(['auth','verified','student'])->group(function(){
+    Route::post('exam/enter/{id}', [ExamController::class,'startExam'])->middleware(['auth','verified','student','can-enter-exam']);
+    Route::post('exam/submit/{id}', [ExamController::class,'submitExam'])->middleware(['auth','verified','student']);
+
 });
 
 // language routes

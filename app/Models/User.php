@@ -54,7 +54,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     //user belongs to many  exams
     public function exams(){
-        return $this->belongsToMany(Exam::class);
+        return $this->belongsToMany(Exam::class)
+        ->withPivot('score','max_time','status')->withTimestamps();
     }
 
     

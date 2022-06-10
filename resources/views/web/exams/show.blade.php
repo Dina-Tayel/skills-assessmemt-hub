@@ -43,6 +43,7 @@
                 <!-- main blog -->
                 <div id="main" class="col-md-9">
 
+                    @include('web.inc.messages')
                     <!-- blog post -->
                     <div class="blog-post mb-5">
                         <p>
@@ -52,7 +53,12 @@
                     <!-- /blog post -->
 
                     <div>
-                        <a href="{{ url("questions/show/$exam->id") }}" class="main-button icon-button pull-left"> {{ __('web.startExamBtn') }}</a>
+                        <form method="POST" action="{{ url("exam/enter/$exam->id") }}">
+                            @csrf
+                            @if ($canEnterBtn == true)
+                            <button type="submit"  class="main-button icon-button pull-left"> {{ __('web.startExamBtn') }}</button> 
+                            @endif
+                        </form>
                     </div>
                 </div>
                 <!-- /main blog -->
