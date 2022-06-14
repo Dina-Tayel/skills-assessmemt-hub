@@ -52,5 +52,5 @@ Route::group(['prefix'=>'dashboard','middleware'=>['auth','verified','can-enter-
     Route::get('/categories',[CatController::class,'index']);
     Route::post('/categories/store',[CatController::class,'store']);
     Route::post('/categories/update',[CatController::class,'update']);
-    Route::delete('/delete/{cat}',[CatController::class,'destroy']);
+    Route::delete('/categories/delete/{cat}',[CatController::class,'destroy']);
 });

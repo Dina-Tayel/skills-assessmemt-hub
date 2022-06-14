@@ -154,7 +154,7 @@
                                         data-bs-target="#updateModal" class="btn btn-primary btn-icon-text edit-btn "><i
                                                 class="mdi mdi-lead-pencil"></i></button>
 
-                                        <button type="button" class="btn btn-danger btn-icon-text delete-btn" data-url="{{url('dashboard/delete/'.$cat->id) }}" data-id="{{ $cat->id }}" >
+                                        <button type="button" class="btn btn-danger btn-icon-text delete-btn" data-url="{{url('dashboard/categories/delete/'.$cat->id) }}" data-id="{{ $cat->id }}" >
                                             <i class="mdi mdi-delete"></i> 
                                           </button>
 
