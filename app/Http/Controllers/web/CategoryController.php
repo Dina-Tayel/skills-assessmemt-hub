@@ -12,8 +12,8 @@ class CategoryController extends Controller
     public function show($id)
     {
         $data["cat"]=Category::findOrFail($id);
-        $data["allCats"]=Category::select("id","name")->get();
-        $data["skills"]=$data["cat"]->skills()->paginate(6);
+        $data["allCats"]=Category::select("id","name")->active()->get();
+        $data["skills"]=$data["cat"]->skills()->active()->paginate(6);
         // using model binding
         // $allCats=Category::select("id","name")->get();
         // $skills=$category->load(['skills'=>function($query){

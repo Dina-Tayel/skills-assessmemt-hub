@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('skill_id')->constrained();
+            // $table->foreignId('skill_id')->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('skill_id');
+            $table->foreign('skill_id')
+            ->references('id')
+            ->on('skills')
+            ->onDelete('cascade');
             $table->text('name');
             $table->text('desc');
             $table->string('img',100);

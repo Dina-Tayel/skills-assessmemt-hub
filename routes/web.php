@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\CatController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\web\CategoryController;
 use App\Http\Controllers\web\ContactController;
 use App\Http\Controllers\web\ExamController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\LangController;
+use App\Http\Controllers\web\ProfileController;
 use App\Http\Controllers\web\SkillController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +23,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('lang')->group(function(){
-    Route::get('/', [HomeController::class,'index']);
+    Route::get('/', [HomeController::class,'redirect']);
+    Route::get('/home', [HomeController::class,'index']);
     Route::get('category/show/{id}', [CategoryController::class,'show']);
     Route::get('skill/show/{id}', [SkillController::class,'show']);
     Route::get('exam/show/{id}', [ExamController::class,'show']);
@@ -30,8 +34,9 @@ Route::middleware('lang')->group(function(){
 });
 
 Route::middleware(['auth','verified','student'])->group(function(){
-    Route::post('exam/enter/{id}', [ExamController::class,'startExam'])->middleware(['auth','verified','student','can-enter-exam']);
-    Route::post('exam/submit/{id}', [ExamController::class,'submitExam'])->middleware(['auth','verified','student']);
+    Route::post('exam/enter/{id}', [ExamController::class,'startExam']);
+    Route::post('exam/submit/{id}', [ExamController::class,'submitExam']);
+    Route::get('/profile',[ProfileController::class,'index']);
 
 });
 
@@ -39,3 +44,13 @@ Route::middleware(['auth','verified','student'])->group(function(){
 Route::get('lang/set/{lang}', [LangController::class,'langs']);
 Route::get('lang/set/{lang}', [LangController::class,'langs']);
 
+
+// admin routes
+Route::group(['prefix'=>'dashboard','middleware'=>['auth','verified','can-enter-dashboard']],function(){
+    Route::get('/home',[AdminHomeController::class,'index']);
+    // Route::get('/home',[HomeController::class,'index']);
+    Route::get('/categories',[CatController::class,'index']);
+    Route::post('/categories/store',[CatController::class,'store']);
+    Route::post('/categories/update',[CatController::class,'update']);
+    Route::delete('/delete/{cat}',[CatController::class,'destroy']);
+});

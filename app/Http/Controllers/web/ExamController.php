@@ -89,7 +89,6 @@ class ExamController extends Controller
         $startTime=$pivotRow->pivot->created_at;
         $diffMins=$submitTime->diffInMinutes($startTime);
         if($diffMins > $exam->duration_mins ){
-
             $score=0;
         }
 

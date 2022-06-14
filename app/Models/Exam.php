@@ -48,5 +48,11 @@ class Exam extends Model
         return json_decode($this->desc)->$lang;
     }
 
+    // use local scope
+    public function scopeActive($query) // camelcase
+    {
+        return $query->where('active',1);
+    }
+
 
 }

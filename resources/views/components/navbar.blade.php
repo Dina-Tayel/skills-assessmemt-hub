@@ -19,9 +19,16 @@
         <li><a href="{{ url('/login') }}">{{__('web.signin')}}</a></li>
         <li><a href="{{ url('/register') }}">{{__('web.signup')}}</a></li>
         @endguest
+
         @auth
         <li><a id="logout-link" href="{{ url('#') }}">{{__('web.signout')}}</a></li>
+        @if (Auth::user()->role->name == "student")
+        <li><a  href="{{ url('/profile') }}">{{__('web.profile')}}</a></li>
+        @else
+        <li><a  href="{{ url('/dashboard/home') }}">{{__('web.dashboard')}}</a></li>
+        @endif
         @endauth
+
         @if (App::getLocale()=='ar')
         <li><a href="{{ url('lang/set/en') }}">EN</a></li>
         @else

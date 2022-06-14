@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained();
+            // $table->foreignId('category_id')->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')
+                    ->references('id')
+                    ->on('categories')
+                    ->onDelete('cascade');
             $table->text('name');
             $table->string('img',100);
             $table->boolean('active')->default(true);

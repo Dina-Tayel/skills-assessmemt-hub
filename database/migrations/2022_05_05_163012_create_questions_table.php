@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exam_id')->constrained();
+            // $table->foreignId('exam_id')->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('exam_id');
+            $table->foreign('exam_id')
+            ->references('id')
+            ->on('exams')
+            ->onDelete('cascade');
             $table->text('title');
             $table->string('option_1',255);
             $table->string('option_2',255);

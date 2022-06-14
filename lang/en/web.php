@@ -8,6 +8,8 @@ return[
     'signin'=>'Sign In',
     'signup'=>'Sign Up',
     'signout'=>'Sigin Out',
+    'profile'=>'Profile',
+    'dashboard'=>'dashboard',
 
     //home page
     'TheroTitle'=>'SkillsHub Free Online Skill Assessment',

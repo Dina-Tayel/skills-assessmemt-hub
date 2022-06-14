@@ -52,4 +52,10 @@ class Skill extends Model
         }
         return $studentNum;
     }
+
+    // use local scope
+    public function scopeActive($query) // camelcase
+    {
+        return $query->where('active',1);
+    }
 }

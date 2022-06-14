@@ -8,6 +8,8 @@ return[
     'signin'=>'تسجيل دخول',
     'signup'=>'تسجيل حساب',
     'signout'=>'تسجيل الخروج',
+    'profile'=>'ملفك الشخصي',
+    'dashboard'=>'لوحةالتحكم',
     //home page
     'TheroTitle'=>'موقع اختبار مهارات اونلاين',
     'TheroDescription'=>'انضم الينا وابدأ باختبر مهاراتك',

@@ -36,5 +36,11 @@ class Category extends Model
         $lang= $lang ?? App::getLocale();
         return json_decode($this->name)->$lang;
     }
+
+    // use local scope
+    public function scopeActive($query) // camelcase
+    {
+        return $query->where('active',1);
+    }
     
 }
