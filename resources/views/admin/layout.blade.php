@@ -30,8 +30,8 @@
           <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
             <div class="ps-lg-1">
               <div class="d-flex align-items-center justify-content-between">
-                <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-                <a href="https://www.bootstrapdash.com/product/corona-free/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
+                <p class="mb-0 font-weight-medium me-3 buy-now-text">Admin Dashboard</p>
+                <a href="{{ url('/') }}" target="_blank" class="btn me-2 buy-now-btn border-0">SkillsHub</a>
               </div>
             </div>
             <div class="d-flex align-items-center justify-content-between">
@@ -47,8 +47,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
           <a class="sidebar-brand brand-logo text-decoration-none text-bold text-white" href="#" >SKILLS HUB</a>
-          <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="{{asset('admin/images/logo-mini.svg')}}" alt="logo" /></a>
-        </div>
+                 </div>
         <ul class="nav">
           <li class="nav-item profile">
             <div class="profile-desc">
@@ -76,6 +75,15 @@
               <span class="menu-title">Categories</span>
             </a>
           </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url('dashboard/skills') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-book-open-page-variant"></i>
+              </span>
+              <span class="menu-title">Skills</span>
+            </a>
+          </li>
+
 
         </ul>
       </nav>

@@ -23,7 +23,7 @@ class SkillFactory extends Factory
                 'en'=>$this->faker->word(),
                 'ar'=>$this->faker->word(),
             ]),
-            'img'=>"skills/$i.png",
+            'img'=>"$i.png",
         ];
     }
 }
