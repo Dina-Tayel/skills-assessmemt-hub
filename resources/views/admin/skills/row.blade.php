@@ -22,7 +22,5 @@
     <i class="mdi mdi-delete"></i>
 </button>
 
-<a href="#" class="btn btn-success btn-icon-text"><i class="mdi mdi-eye"></i></a>
-
 </td>
 </tr>

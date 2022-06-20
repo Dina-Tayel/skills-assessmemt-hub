@@ -183,6 +183,8 @@
 <script>
     $('#success-msg').hide()
     $('#form-btn').click(function(e){
+        $('#name_en_error').text('');
+        $('#name_ar_error').text('');
         e.preventDefault();
         let formData=$('#add-form').serialize();
         $.ajax({
@@ -193,6 +195,7 @@
                 // console.log(data)
                 $('.tbody-data').prepend(data)
                 $('#exampleModal').modal('hide')
+                $('#add-form')[0].reset()
             },error:function(xhr,status,error)
                 {
                    $.each(xhr.responseJSON.errors,function(key,value){
