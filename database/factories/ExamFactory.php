@@ -27,7 +27,7 @@ class ExamFactory extends Factory
                 'en'=>$this->faker->text(200),
                 'ar'=>$this->faker->text(200),
             ]),
-            'img'=>"exams/$i.png",
+            'img'=>"$i.png",
             'questions_no'=>10,
             'duration_mins'=>$this->faker->numberBetween(10,30)*3,
             'difficulty'=>$this->faker->numberBetween(1,5),

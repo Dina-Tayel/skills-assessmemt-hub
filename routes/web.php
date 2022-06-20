@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CatController;
+use App\Http\Controllers\Admin\ExamController as AdminExamController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\SkillController as AdminSkillController;
 use App\Http\Controllers\web\CategoryController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\LangController;
 use App\Http\Controllers\web\ProfileController;
 use App\Http\Controllers\web\SkillController;
-use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,11 +55,25 @@ Route::group(['prefix'=>'dashboard'],function(){
     Route::post('/categories/store',[CatController::class,'store']);
     Route::post('/categories/update',[CatController::class,'update']);
     Route::delete('/categories/delete/{cat}',[CatController::class,'destroy']);
-
+    //////////////////////////////skills
     Route::get('/skills',[AdminSkillController::class,'index']);
     Route::post('/skills/store',[AdminSkillController::class,'store']);
     Route::get('/skills/edit',[AdminSkillController::class,'edit']);
     Route::post('/skills/update',[AdminSkillController::class,'update']);
     Route::delete('/skills/delete',[AdminSkillController::class,'destroy']);
-
+    ////////////////////////////////exams
+    Route::get('/exams',[AdminExamController::class,'index']);
+    Route::get('/exams/create',[AdminExamController::class,'create']);
+    Route::post('/exams/store',[AdminExamController::class,'store']);
+    Route::get('/exams/show/{exam}',[AdminExamController::class,'show']);
+    Route::get('/exams/edit/{exam}',[AdminExamController::class,'edit']);
+    Route::put('/exams/update/{exam}',[AdminExamController::class,'update']);
+    Route::delete('/exams/delete',[AdminExamController::class,'destroy']);
+    ///////////////////////////////questions
+    Route::get('/exam/create-questions/{exam}',[AdminExamController::class,'createQuestions']);
+    Route::post('/exam/store-questions/{exam}',[AdminExamController::class,'storeQuestions']);
+    Route::get('/exams/show-questions/{exam}/questions',[AdminExamController::class,'showQusetions']);
+    Route::get('/exams/edit-questions/{exam}/{question}',[AdminExamController::class,'editQuestions']);
+    Route::put('/exam/update-questions/{exam}/{question}',[AdminExamController::class,'updateQuestions']);
+   
 });

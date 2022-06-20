@@ -83,6 +83,14 @@
               <span class="menu-title">Skills</span>
             </a>
           </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url('dashboard/exams') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-lightbulb-outline"></i>
+              </span>
+              <span class="menu-title">Exams</span>
+            </a>
+          </li>
 
 
         </ul>

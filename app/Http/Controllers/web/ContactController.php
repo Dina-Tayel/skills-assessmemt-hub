@@ -20,12 +20,11 @@ class ContactController extends Controller
     }
     public function send(ContactRequest $request)
     {
-        // if($request->ajax())
-        // {
-        //     dd($request->all());
-        // }
-        Message::create($request->validated());
-        $data=["success"=>'Your Message is sent Successfully'];
-        return response()->json($data);
+        if($request->ajax())
+        {
+            Message::create($request->validated());
+            $data=["success"=>'Your Message is sent Successfully'];
+            return response()->json($data);
+        }
     }
 }
