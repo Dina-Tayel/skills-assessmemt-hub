@@ -94,11 +94,23 @@
           <li class="nav-item menu-items">
             <a class="nav-link" href="{{ url('dashboard/students') }}">
               <span class="menu-icon">
-                <i class="mdi mdi-human-handsdown"></i>
+                {{-- <i class="mdi mdi-human-handsdown"></i> --}}
+                <i class="mdi mdi-school"></i>
               </span>
               <span class="menu-title">Students</span>
             </a>
           </li>
+          @if (auth()->user()->role->name== 'super admin')
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url('dashboard/admins') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-human-handsdown"></i>
+              </span>
+              <span class="menu-title">Admins</span>
+            </a>
+          </li>  
+          @endif
+
 
 
         </ul>

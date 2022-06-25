@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CatController;
 use App\Http\Controllers\Admin\ExamController as AdminExamController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
@@ -49,7 +50,7 @@ Route::get('lang/set/{lang}', [LangController::class,'langs']);
 
 // ,'middleware'=>['auth','verified','can-enter-dashboard']
 // admin routes
-Route::group(['prefix'=>'dashboard'],function(){
+Route::group(['prefix'=>'dashboard','middleware'=>['auth','verified','can-enter-dashboard']],function(){
     Route::get('/home',[AdminHomeController::class,'index']);
     // Route::get('/home',[HomeController::class,'index']);
     Route::get('/categories',[CatController::class,'index']);
@@ -81,4 +82,16 @@ Route::group(['prefix'=>'dashboard'],function(){
     Route::get('students/show-scores/{studentId}',[StudentController::class,'show']);
     Route::get('students/open-exam/{studentId}/{examId}',[StudentController::class,'openExam']);
     Route::get('students/close-exam/{studentId}/{examId}',[StudentController::class,'closeExam']);
+    //////////////////////Admins
+    Route::middleware('superadmin')->group(function(){
+        Route::get('/admins',[AdminController::class,'index']);
+        Route::get('/admins/create-new-admin',[AdminController::class,'create']);
+        Route::post('/admins/store-admin',[AdminController::class,'store']);
+        Route::post('/admins/promote/{id}',[AdminController::class,'promote']);
+        Route::post('/admins/demote/{id}',[AdminController::class,'demote']);
+        Route::post('/admins/delete/{id}',[AdminController::class,'delete']);
+
+
+    });
+
 });
