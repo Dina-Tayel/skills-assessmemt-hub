@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CatController;
 use App\Http\Controllers\Admin\ExamController as AdminExamController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\SkillController as AdminSkillController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\web\CategoryController;
 use App\Http\Controllers\web\ContactController;
 use App\Http\Controllers\web\ExamController;
@@ -75,5 +76,9 @@ Route::group(['prefix'=>'dashboard'],function(){
     Route::get('/exams/show-questions/{exam}/questions',[AdminExamController::class,'showQusetions']);
     Route::get('/exams/edit-questions/{exam}/{question}',[AdminExamController::class,'editQuestions']);
     Route::put('/exam/update-questions/{exam}/{question}',[AdminExamController::class,'updateQuestions']);
-   
+    ///////////////////////////students
+    Route::get('students',[StudentController::class,'index']);
+    Route::get('students/show-scores/{studentId}',[StudentController::class,'show']);
+    Route::get('students/open-exam/{studentId}/{examId}',[StudentController::class,'openExam']);
+    Route::get('students/close-exam/{studentId}/{examId}',[StudentController::class,'closeExam']);
 });
