@@ -110,7 +110,14 @@
             </a>
           </li>  
           @endif
-
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url('dashboard/messages') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-email-outline"></i>
+              </span>
+              <span class="menu-title">Messages</span>
+            </a>
+          </li>
 
 
         </ul>

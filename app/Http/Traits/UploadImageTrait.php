@@ -8,7 +8,6 @@ trait UploadImageTrait{
 
     public function uploadImage($name,$folder)
     {
-        
        $imageExtension=$name->getClientOriginalExtension();
        $imageUploadName=time(). uniqid() . '.' . $imageExtension;
        $path=public_path($folder);

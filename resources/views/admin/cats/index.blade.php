@@ -64,8 +64,6 @@
                         </div>
                     </div>
                 </div>
-
-
                                 <!-- Modal -->
                                 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">

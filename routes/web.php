@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CatController;
 use App\Http\Controllers\Admin\ExamController as AdminExamController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\SkillController as AdminSkillController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\web\CategoryController;
@@ -71,7 +72,7 @@ Route::group(['prefix'=>'dashboard','middleware'=>['auth','verified','can-enter-
     Route::get('/exams/edit/{exam}',[AdminExamController::class,'edit']);
     Route::put('/exams/update/{exam}',[AdminExamController::class,'update']);
     Route::delete('/exams/delete',[AdminExamController::class,'destroy']);
-    ///////////////////////////////questions
+    //////////////////////////////questions
     Route::get('/exam/create-questions/{exam}',[AdminExamController::class,'createQuestions']);
     Route::post('/exam/store-questions/{exam}',[AdminExamController::class,'storeQuestions']);
     Route::get('/exams/show-questions/{exam}/questions',[AdminExamController::class,'showQusetions']);
@@ -90,8 +91,9 @@ Route::group(['prefix'=>'dashboard','middleware'=>['auth','verified','can-enter-
         Route::post('/admins/promote/{id}',[AdminController::class,'promote']);
         Route::post('/admins/demote/{id}',[AdminController::class,'demote']);
         Route::post('/admins/delete/{id}',[AdminController::class,'delete']);
-
-
     });
-
+        ///////////////////Messages
+        Route::get('/messages',[MessageController::class,'index']);
+        Route::get('/messages/show-message/{message}',[MessageController::class,'show']);
+        Route::post('/messages/response/{message}',[MessageController::class,'response']);  
 });
