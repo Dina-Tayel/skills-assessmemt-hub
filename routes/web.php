@@ -1,20 +1,21 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CatController;
-use App\Http\Controllers\Admin\ExamController as AdminExamController;
-use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\Admin\MessageController;
-use App\Http\Controllers\Admin\SkillController as AdminSkillController;
-use App\Http\Controllers\Admin\StudentController;
-use App\Http\Controllers\web\CategoryController;
-use App\Http\Controllers\web\ContactController;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\ExamController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\LangController;
-use App\Http\Controllers\web\ProfileController;
+use App\Http\Controllers\Admin\CatController;
 use App\Http\Controllers\web\SkillController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\web\ContactController;
+use App\Http\Controllers\web\ProfileController;
+use App\Http\Controllers\web\CategoryController;
+use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\ExamController as AdminExamController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\SkillController as AdminSkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,3 +98,10 @@ Route::group(['prefix'=>'dashboard','middleware'=>['auth','verified','can-enter-
         Route::get('/messages/show-message/{message}',[MessageController::class,'show']);
         Route::post('/messages/response/{message}',[MessageController::class,'response']);  
 });
+
+
+
+// Route::get('/', function () {
+//     Toastr::success('Messages in here');
+//     return view('web.home.index');
+// });

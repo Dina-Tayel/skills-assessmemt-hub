@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\ExamAddedEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExamRequset;
 use App\Http\Requests\QuestionsRequest;
@@ -20,7 +21,6 @@ class ExamController extends Controller
     public function index()
     {
         $data['exams']=Exam::select('id','name','skill_id','active','questions_no','img')->orderBy('id','DESC')-> paginate(10);
-        // dd($data);
         return view('admin.exams.index')->with($data);
     }
 
@@ -43,7 +43,7 @@ class ExamController extends Controller
         'desc'=>json_encode(['en'=>$request->desc_en,'ar'=>$request->desc_ar]),
         'active'=>0,
         ]+$request->validated());
-
+        event(new ExamAddedEvent) ;
         $request->session()->flash('prev',"exam/create-questions/$exam->id");
         return redirect(url("dashboard/exam/create-questions/$exam->id"));
 

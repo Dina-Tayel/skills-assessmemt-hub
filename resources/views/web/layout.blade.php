@@ -21,6 +21,9 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="{{ asset('web/css/style.css') }}" />
 
+    <!-- Toaster Package -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
     @yield('css')
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -107,6 +110,9 @@
 
     <!-- jQuery Plugins -->
     <script type="text/javascript" src="{{ asset('web/js/jquery.min.js') }}"></script>
+    <!-- Toaster -->
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <!-- end toaster -->
     <script type="text/javascript" src="{{ asset('web/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web/js/main.js') }}"></script>
     <script>
@@ -115,8 +121,26 @@
             $('#form-logout').submit()
         })
     </script>
-
-    @yield('scripts')
+    {{-- <script> toastr.success('New Exam addedd');</script> --}}
+    {!! Toastr::message() !!}
+    
+        <!-- pusher-->
+        <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
+        <script>
+      
+          // Enable pusher logging - don't include this in production
+          Pusher.logToConsole = true;
+          var pusher = new Pusher('a010621fd2ce743268f5', {
+            cluster: 'eu'
+          });
+          var channel = pusher.subscribe('notifications-channel');
+          channel.bind('exam-added', function(data) {
+            toastr.success('New Exam addedd');
+          });
+        </script>
+        <!-- end pusher--->
+      
+       @yield('scripts')
 </body>
 
 </html>
