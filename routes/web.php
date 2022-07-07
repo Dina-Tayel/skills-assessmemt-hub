@@ -14,6 +14,7 @@ use App\Http\Controllers\web\CategoryController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ExamController as AdminExamController;
+use App\Http\Controllers\Admin\ExamQuestions;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\SkillController as AdminSkillController;
 
@@ -33,17 +34,19 @@ Route::middleware('lang')->group(function(){
     Route::get('/home', [HomeController::class,'index']);
     Route::get('category/show/{id}', [CategoryController::class,'show']);
     Route::get('skill/show/{id}', [SkillController::class,'show']);
-    Route::get('exam/show/{id}', [ExamController::class,'show']);
     Route::get('questions/show/{id}', [ExamController::class,'questions']);
-    Route::get('/contact',[ContactController::class,"index"])->middleware(['auth','verified','student']);
     Route::post('contact/send/message',[ContactController::class,"send"]);
+    Route::middleware(['auth','verified','student'])->group(function(){
+        Route::get('/contact',[ContactController::class,"index"]);
+        Route::get('exam/show/{id}', [ExamController::class,'show']);
+        Route::get('/profile',[ProfileController::class,'index']);
+    });
 });
 
 Route::middleware(['auth','verified','student'])->group(function(){
     Route::post('exam/enter/{id}', [ExamController::class,'startExam']);
     Route::post('exam/submit/{id}', [ExamController::class,'submitExam']);
     Route::get('/profile',[ProfileController::class,'index']);
-
 });
 
 // language routes
@@ -52,7 +55,7 @@ Route::get('lang/set/{lang}', [LangController::class,'langs']);
 
 // ,'middleware'=>['auth','verified','can-enter-dashboard']
 // admin routes
-Route::group(['prefix'=>'dashboard','middleware'=>['auth','verified','can-enter-dashboard']],function(){
+Route::group(['prefix'=>'dashboard'],function(){
     Route::get('/home',[AdminHomeController::class,'index']);
     // Route::get('/home',[HomeController::class,'index']);
     Route::get('/categories',[CatController::class,'index']);
@@ -66,19 +69,22 @@ Route::group(['prefix'=>'dashboard','middleware'=>['auth','verified','can-enter-
     Route::post('/skills/update',[AdminSkillController::class,'update']);
     Route::delete('/skills/delete',[AdminSkillController::class,'destroy']);
     ////////////////////////////////exams
-    Route::get('/exams',[AdminExamController::class,'index']);
-    Route::get('/exams/create',[AdminExamController::class,'create']);
-    Route::post('/exams/store',[AdminExamController::class,'store']);
-    Route::get('/exams/show/{exam}',[AdminExamController::class,'show']);
-    Route::get('/exams/edit/{exam}',[AdminExamController::class,'edit']);
-    Route::put('/exams/update/{exam}',[AdminExamController::class,'update']);
-    Route::delete('/exams/delete',[AdminExamController::class,'destroy']);
+    Route::get('/exams',[AdminExamController::class,'index'])->name('exam.index');
+    Route::get('/exams/create',[AdminExamController::class,'create'])->name('exam.create');
+    Route::post('/exams/store',[AdminExamController::class,'store'])->name('exam.store');
+    Route::get('/exams/show/{exam}',[AdminExamController::class,'show'])->name('exam.show');
+    Route::get('/exams/edit/{exam}',[AdminExamController::class,'edit'])->name('exam.edit');
+    Route::put('/exams/update/{exam}',[AdminExamController::class,'update'])->name('exam.update');
+    Route::delete('/exams/delete',[AdminExamController::class,'destroy'])->name('exam.destroy');
+
     //////////////////////////////questions
-    Route::get('/exam/create-questions/{exam}',[AdminExamController::class,'createQuestions']);
-    Route::post('/exam/store-questions/{exam}',[AdminExamController::class,'storeQuestions']);
-    Route::get('/exams/show-questions/{exam}/questions',[AdminExamController::class,'showQusetions']);
-    Route::get('/exams/edit-questions/{exam}/{question}',[AdminExamController::class,'editQuestions']);
-    Route::put('/exam/update-questions/{exam}/{question}',[AdminExamController::class,'updateQuestions']);
+    Route::get('/exam/create-questions/{exam}',[ExamQuestions::class,'create'])->name('exam-questions.create');
+    Route::post('/exam/store-questions/{exam}',[ExamQuestions::class,'store'])->name('exam-questions.store');
+    Route::get('/exams/show-questions/{exam}/questions',[ExamQuestions::class,'show'])->name('exam-questions.show');
+    Route::get('/exams/edit-questions/{exam}/{question}',[ExamQuestions::class,'edit'])->name('exam-questions.edit');
+    Route::put('/exam/update-questions/{exam}/{question}',[ExamQuestions::class,'update'])->name('exam-questions.update');
+    // Route::resource('exam-questions',ExamQuestions::class)->except('destroy');
+
     ///////////////////////////students
     Route::get('students',[StudentController::class,'index']);
     Route::get('students/show-scores/{studentId}',[StudentController::class,'show']);
@@ -96,7 +102,7 @@ Route::group(['prefix'=>'dashboard','middleware'=>['auth','verified','can-enter-
         ///////////////////Messages
         Route::get('/messages',[MessageController::class,'index']);
         Route::get('/messages/show-message/{message}',[MessageController::class,'show']);
-        Route::post('/messages/response/{message}',[MessageController::class,'response']);  
+        Route::post('/messages/response/{message}',[MessageController::class,'response']);
 });
 
 

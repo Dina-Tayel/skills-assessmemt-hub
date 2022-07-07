@@ -15,15 +15,15 @@ class ExamController extends Controller
     {
         $data["exam"]=Exam::findOrFail($examId);
         $user=Auth::user();
-        $pivotRow=$user->exams()->where("exam_id",$examId)->first();
         $data['canEnterBtn']=true;
         if($user !== null)
         {
+            $pivotRow=$user->exams()->where("exam_id",$examId)->first();
             if($pivotRow !== null && $pivotRow->pivot->status == "closed")
             {
                 $data['canEnterBtn']= false;
             }
-            
+
         }
         return view('web.exams.show')->with($data);
     }
@@ -42,7 +42,7 @@ class ExamController extends Controller
         $request->session()->flash('previousPage',"start/$examId");
         return redirect(url("questions/show/$examId"));
     }
-    
+
     public function questions($examId , Request $request)
     {
         $data["exam"]=Exam::findOrFail($examId);
@@ -51,14 +51,13 @@ class ExamController extends Controller
             return redirect(url("exam/show/$examId"));
         }
         $request->session()->flash('previousPage',"questions/$examId");
-        
+
         return view('web.exams.questions')->with($data);
     }
 
 
     public function submitExam($id, Request $request)
     {
-        
         $request->validate([
             'answers'=>'required|array',
             'answers.*'=>['required|in:1,2,3'],
@@ -67,7 +66,7 @@ class ExamController extends Controller
             if(session('previousPage') !== "questions/$id"){
                 return redirect(url("exam/show/$id"));
             }
-            
+
             //calulate score
         $exam=Exam::findOrFail($id);
         // return $exam->duration_mins;
@@ -84,7 +83,7 @@ class ExamController extends Controller
                 {
                     $points +=1;
                 }
-            
+
             }
 
         }

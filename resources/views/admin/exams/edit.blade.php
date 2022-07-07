@@ -8,7 +8,7 @@ Edit Exam
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Edit Exam</h4>
-                <form class="form-sample" method="POST" action="{{ url("dashboard/exams/update/$exam->id") }}" enctype="multipart/form-data">
+                <form class="form-sample" method="POST" action="{{ route("exam.update",$exam->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <p class="card-description"> @include('admin.inc.messages') </p>
@@ -92,7 +92,7 @@ Edit Exam
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Questions no.</label>
                                 <div class="col-sm-9">
-                                    <input type="number" name="questions_no" value="{{ $exam->questions_no }}" class="form-control" >
+                                    <input type="number" name="questions_no" value="{{ $exam->questions_no }}" class="form-control" disabled >
                                     @error('questions_no')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror

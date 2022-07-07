@@ -12,7 +12,7 @@ class Exam extends Model
 
      //fillable fileds
      protected $guarded=['id','created_at','updated_at'];
-    
+
     //relationship
 
     //exam belongs to skill
@@ -53,6 +53,8 @@ class Exam extends Model
     {
         return $query->where('active',1);
     }
+
+
 
 
 }

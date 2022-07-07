@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card- text-center">Exam Qustions</h4>
-                <p class="card-description"> <a href="{{ url('dashboard/exams/create') }}"
+                <p class="card-description"> <a href="{{ route('exam.create') }}"
                         class="btn btn-outline-info btn-fw">Add New Exam</a>
                 </p>
                 <div class="table table-responsive">

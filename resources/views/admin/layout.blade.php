@@ -84,7 +84,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ url('dashboard/exams') }}">
+            <a class="nav-link" href="{{ route('exam.index') }}">
               <span class="menu-icon">
                 <i class="mdi mdi-lightbulb-outline"></i>
               </span>

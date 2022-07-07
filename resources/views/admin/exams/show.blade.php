@@ -10,7 +10,7 @@
       <div class="card-body">
         <h4 class="card-title">{{ $exam->name('en') }} Exam</h4>
         <p class="card-description"> <a class="text-decoration-none" href="{{ url('dashboard/home') }}">Home</a>  <code>/</code>
-            <code> <a class="text-decoration-none" href="{{ url('dashboard/exams') }}">Exams </a> </code>
+            <code> <a class="text-decoration-none" href="{{ route('exam.index') }}">Exams </a> </code>
         </p>
         <div class="table-responsive">
           <table class="table">

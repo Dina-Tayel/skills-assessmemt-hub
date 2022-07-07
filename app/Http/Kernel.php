@@ -69,5 +69,8 @@ class Kernel extends HttpKernel
         'superadmin' => \App\Http\Middleware\isSuperAdmin::class,
         'can-enter-exam' => \App\Http\Middleware\CanEnterExam::class,
         'can-enter-dashboard'=>\App\Http\Middleware\CanEnterDashboard::class,
+        'check.lang'=>\App\Http\Middleware\checkLang::class,
+        'start.exam'=>\App\Http\Middleware\StartExam::class,
+        'submit.exam' => \App\Http\Middleware\SubmitExam::class,
     ];
 }

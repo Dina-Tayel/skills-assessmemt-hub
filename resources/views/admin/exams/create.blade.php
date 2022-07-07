@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Inset New Exam</h4>
-                <form class="form-sample" method="POST" action="{{ url('dashboard/exams/store') }}" enctype="multipart/form-data">
+                <form class="form-sample" method="POST" action="{{ route('exam.store') }}" enctype="multipart/form-data">
                     @csrf
                     <p class="card-description"> @include('admin.inc.messages') </p>
                     <div class="row">

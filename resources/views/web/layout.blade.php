@@ -123,7 +123,6 @@
     </script>
     {{-- <script> toastr.success('New Exam addedd');</script> --}}
     {!! Toastr::message() !!}
-    
         <!-- pusher-->
         <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
         <script>

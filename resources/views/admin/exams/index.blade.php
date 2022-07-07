@@ -8,7 +8,8 @@
             <div class="card-body">
                 <h4 class="card- text-center">All Exams</h4>
                 @include('admin.inc.ajax-messages')
-                <p class="card-description"> <a href="{{ url('dashboard/exams/create') }}" class="btn btn-outline-info btn-fw">Add New Exam</a>
+                <p class="card-description"> <a href="{{ route('exam.create') }}" class="btn btn-outline-info btn-fw">Add New
+                        Exam</a>
                 </p>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -47,17 +48,20 @@
                                     @endif
                                     <td><img src="{{ asset('uploads/exams/' . $exam->img) }}"></td>
                                     <td>
-                                            <a href="{{ url("dashboard/exams/edit/$exam->id") }}" class="btn btn-primary btn-icon-text edit-btn "><i
-                                                    class="mdi mdi-lead-pencil"></i></a>
+                                        <a href="{{ route('exam.edit', $exam->id) }}"
+                                            class="btn btn-primary btn-icon-text edit-btn "><i
+                                                class="mdi mdi-lead-pencil"></i></a>
 
-                                        <button type="button" class="btn btn-danger btn-icon-text delete-btn" data-id="{{ $exam->id }}">
+                                        <button type="button" class="btn btn-danger btn-icon-text delete-btn"
+                                            data-id="{{ $exam->id }}">
                                             <i class="mdi mdi-delete"></i>
                                         </button>
 
-                                        <a href='{{ url("dashboard/exams/show/$exam->id") }}' class="btn btn-primary btn-icon-text"><i
-                                                class="mdi mdi-eye"></i></a>
-                                                <a href="{{ url("dashboard/exams/show-questions/$exam->id/questions") }}" class="btn btn-success btn-icon-text"><i class="mdi mdi-help"></i></a>
-                                                
+                                        <a href='{{ route('exam.show', $exam->id) }}'
+                                            class="btn btn-primary btn-icon-text"><i class="mdi mdi-eye"></i></a>
+                                        <a href="{{ route('exam-questions.show', $exam->id) }}"
+                                            class="btn btn-success btn-icon-text"><i class="mdi mdi-help"></i></a>
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -74,31 +78,29 @@
 @endsection
 
 @section('scripts')
+    <script>
+        $('#success-msg').hide();
+        $(document).on('click', '.delete-btn', function(e) {
+            e.preventDefault();
+            let id = $(this).attr('data-id');
+            let route = '{{ route('exam.destroy') }}';
+            $.ajax({
+                type: 'delete',
+                url: route,
+                data: {
+                    'id': id,
+                    "_token": "{{ csrf_token() }}",
+                },
+                success: function(data) {
+                    if (data.success) {
 
-<script>
-    $('#success-msg').hide();
-  $(document).on('click','.delete-btn',function(e){
-    e.preventDefault();
-    let id = $(this).attr('data-id');
-    let route='{{ url('dashboard/exams/delete') }}';
-    $.ajax({
-        type:'delete',
-        url:route,
-        data:{
-            'id':id,
-             "_token":"{{ csrf_token() }}" ,
-        },
-        success:function(data){
-            if(data.success){
+                        $('#success-msg').show()
+                        $('#success-msg').text(data.success)
+                        $('#' + data.id).remove()
+                    }
+                }
+            })
 
-                $('#success-msg').show()
-                $('#success-msg').text(data.success)
-                $('#'+data.id).remove()
-            }
-        }
-    })
-    
-  })
-</script>
-    
+        })
+    </script>
 @endsection
